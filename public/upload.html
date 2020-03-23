@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/js/mdb.min.js"></script>
+    </head>
+    <body>
+        <div class="main-div">
+            <h1 class="upload-title">Upload size</h1>
+            <div class="input-group" id="main" style="max-width: 50%; margin-left: 25%; margin-right: 50%;">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+                  <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                </div>
+               
+              </div>
+              <div class="d-flex">
+                <button type="button" id="buttonUpload" class="btn btn-primary btn-rounded btn-upload ml-auto">Upload</button>
+              </div>
+        </div>
+        
+    </body>
+    
+    <script>
+        let file = null;
+        let width = screen.width;        
+        $('#buttonUpload').attr('style', 'background-color: #C0C0C0 !important;')
+        $('#inputGroupFile01').change((event) => {
+            console.log(event);
+            if (event.target.files[0]){
+                file = event.target.files[0]
+                $('#buttonUpload').attr('style', 'background-color: #3399FF !important;')
+            } else {
+                file = null;
+                $('#buttonUpload').attr('style', 'background-color: #C0C0C0 !important;')
+            }
+        })
+        $('#buttonUpload').click( () => {
+            if (file){
+                let formData = new FormData();
+                formData.append('file', file)
+                let request = new XMLHttpRequest();
+                request.open("POST", "/api/upload");
+                request.send(formData);
+            }
+        })
+    </script>
+    <style>
+        .upload-title{
+            margin-left: 25%;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .btn-upload{
+            margin-right: 25%;
+            text-align: right;
+            border-radius: 20px;
+            border: 1px solid;
+            border-color: lightslategray;
+        }
+        body {
+            background-color: rgb(238, 228, 211);
+        }
+    </style>
+</html>

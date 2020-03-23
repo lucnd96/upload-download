@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.1/js/mdb.min.js"></script>
+    </head>
+    <body>
+        <div class="main-div">
+            <h1 class="upload-title">Download size</h1>
+            <button type="button" id="buttonDownload" class="btn btn-primary btn-rounded btn-upload">Download</button>
+        </div>
+        <a id="download" style="display: none;" href="no-script.html">Download now!</a>
+    </body>
+    
+    <script>
+        let file = null;
+        let width = screen.width;        
+        $('#buttonDownload').click( () => {
+            window.location.href = '/api/download'
+        })
+    </script>
+    <style>
+        .upload-title{
+            margin-left: 25%;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .btn-upload{
+            margin-right: 25%;
+            text-align: right;
+            border-radius: 20px;
+            border: 1px solid;
+            border-color: lightslategray;
+        }
+        body {
+            background-color: rgb(238, 228, 211);
+        }
+        #buttonDownload{
+            margin-left: 25%;
+        }
+    </style>
+</html>

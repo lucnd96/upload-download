@@ -1,0 +1,161 @@
+<!doctype html public "-//w3c//dtd html 4.0 astah-command//en">
+
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+   <title>astah* コマンドラインツール 利用ガイド</title>
+</head>
+
+<body>
+
+<h1>astah* コマンドラインツール 利用ガイド</h1>
+<P align="right">2012年3月22日更新<br>
+株式会社チェンジビジョン</p>
+<hr>
+<h2>【概要】</h2>
+astah*インストールフォルダに含まれるコマンドラインツール
+(astah-commandw.exe[※MacとLinuxではastah-command.sh])を利用することで、
+コマンドラインから図の画像出力やプロジェクトの簡易比較が行えます。<br>
+<ul>
+<li><a href="#image_command">図の画像出力</a>
+<li><a href="#diff_command">プロジェクトの簡易比較</a>（professional版のみ）
+<li><a href="#preference">コマンドラインツールの設定</a>
+</ul>
+
+<hr>
+
+<h2 id="image_command">【図の画像出力】</h2>
+-imageを使用することで、プロジェクトファイルに含まれる図をPNG、EMF、JPEG のいずれかの形式で画像ファイルとして出力できます。
+画像フォーマットを指定しない場合は、PNG 形式で出力されます。
+<p>Macでの実行には<a href="/ja/product/astah-requirement.html" Title="professional、SysML、UML、communityのシステム要件">システム要件を満たしたJava</a>を別途インストールしてください。</p>
+<fieldset style="border:double">
+<legend>Windowsで、C:\input\hoge.astaファイルのER図をC:\output配下にPNG形式で出力する例</legend>
+<samp>astah-commandw.exe -image er -f C:\input\hoge.asta -o C:\output</samp>
+</fieldset>
+<br>
+<fieldset style="border:double">
+<legend>Mac/Linuxで、~/input/hoge.astaファイルの全図を~/output配下にJPEG形式で出力する例</legend>
+<samp>astah-command.sh -image all -f ~/input/hoge.asta -o ~/output -t jpg</samp>
+</fieldset>
+<br>
+<u>オプション</u>
+<table border="1">
+<tr>
+	<th>オプション</th>
+	<th>説明</th>
+	<th>種類</th>
+	<th>備考</th>
+</tr>
+<tr>
+	<td rowspan="20">-image</td>
+	<td rowspan="20"> 画像出力アクション</td>
+	<td>all</td><td>全図</td>
+</tr>
+<tr><td>cl</td><td>クラス図</td></tr>
+<tr><td>uc</td><td>ユースケース図</td></tr>
+<tr><td>ucd</td><td>ユースケース記述</td></tr>
+<tr><td>sc</td><td>ステートマシン図</td></tr>
+<tr><td>act</td><td>アクティビティ図</td></tr>
+<tr><td>seq</td><td>シーケンス図</td></tr>
+<tr><td>com</td><td>コミュニケーション図</td></tr>
+<tr><td>cmp</td><td>コンポーネント図</td></tr>
+<tr><td>dep</td><td>配置図</td></tr>
+<tr><td>cs</td><td>合成構造図</td></tr>
+<tr><td>fc</td><td>フローチャート</td></tr>
+<tr><td>dfd</td><td>データフロー図</td></tr>
+<tr><td>er</td><td>ER図</td></tr>
+<tr><td>crud</td><td>CRUD</td></tr>
+<tr><td>mm</td><td>マインドマップ</td></tr>
+<tr><td>rqd</td><td>要求図</td></tr>
+<tr><td>rqt</td><td>要求テーブル</td></tr>
+<tr><td>tm</td><td>トレーサビリティマップ</td></tr>
+<tr><td>ignore-ref</td><td>参照プロジェクトの図を無視する</td></tr>
+
+<tr>
+	<td>-dpi,--dpi <i>[image dpi]</i></td>
+    <td>出力解像度</td>
+	<td>-</td>
+	<td>出力する画像の解像度を指定する。<br>
+              デフォルトは、96（システムプロパティに設定されている値）。
+              解像度を72にすると、画面に表示されている大きさと同等の画像を出力する。</td>
+</tr>
+<tr>
+	<td>-f,--file <i>[target file]</i></td>
+    <td>出力対象ファイル</td>
+	<td>-</td>
+	<td>-</td>
+</tr>
+<tr>
+	<td>-id,--dgm_id <i>[ids for target diagrams]</i></td>
+    <td>出力対象ID指定</td>
+	<td>-</td>
+	<td>図のID列をスペース区切りで指定。<br>
+              この場合、出力時に名前空間のフォルダを作成せず、フラットに画像ファイルを出力する。
+              ファイル名は、図名ではなく、ID名になる。</td>
+</tr>
+<tr>
+	<td>-o,--output <i>[output]</i></td>
+	<td>出力先ベースフォルダ</td>
+	<td>-</td>
+	<td>出力先フォルダは、「出力先ベースフォルダ + プロジェクトファイル名」
+</td>
+</tr>
+
+<tr>
+	<td rowspan="3">-t,--type <i>[image type]</i></td>
+	<td rowspan="3">出力画像フォーマット</td>
+	<td>png</td><td>PNG</td>
+</tr>
+<tr><td>jpg</td><td>JPEG</td></tr>
+<tr><td>emf</td><td>EMF(拡張メタファイル)</td></tr>
+</table>
+<br>
+
+<hr>
+
+<h2 id="diff_command">【プロジェクトの簡易比較】</h2>
+-diffを利用することで、コマンドラインからプロジェクトの簡易比較を行います。<br>
+<br>
+<fieldset style="border:double">
+<legend>Windowsで、base.astaとref.astaを比較する例</legend>
+<samp>astah-commandw.exe -diff base.asta ref.asta</samp>
+</fieldset>
+<br>
+<fieldset style="border:double">
+<legend>Mac/Linuxで、base.astaとref.astaを比較する例</legend>
+<samp>astah-command.sh -diff base.asta ref.asta</samp>
+</fieldset>
+<br>
+
+<hr>
+
+<h2 id="preference">【コマンドラインツールの設定】</h2>
+コマンドラインツールの実行には、astah*の実行環境が必要です。
+大きなサイズのプロジェクトファイルを扱う場合に、JavaVMのメモリ管理オプションの調整が必要なことがあります。 
+スタックサイズは、astah*のシステムプロパティの設定値を使用します。
+初期ヒープサイズと最大ヒープサイズは、以下のように設定してください。<br>
+<br>
+<fieldset style="border:double">
+<legend>Windows環境 : astah-commandw.l4j.iniの編集</legend>
+[初期ヒープサイズ]<br>
+<b>-Xms16m</b><br>
+16mの部分がサイズ（この例では16Mバイト）になりますので、ファイルに含まれるこの部分を変更します。<br>
+<br>
+[最大ヒープサイズ]<br>
+<b>-Xmx384m</b><br>
+384mの部分がサイズ（この例では384Mバイト）になりますので、ファイルに含まれるこの部分を変更します。<br>
+</fieldset>
+<br>
+<fieldset style="border:double">
+<legend>Mac/Linux環境 : astah-command.shの編集</legend>
+[初期ヒープサイズ]<br>
+<b>INITIAL_HEAP_SIZE=64m</b><br>
+64mの部分がサイズ（この例では64Mバイト）になりますので、ファイルに含まれるこの部分を変更します。<br>
+<br>
+[最大ヒープサイズ]<br>
+<b>MAXIMUM_HEAP_SIZE=1024m</b><br>
+1024mの部分がサイズ（この例では1024Mバイト）になりますので、ファイルに含まれるこの部分を変更します。<br>
+</fieldset>
+
+</body>
+</html>
